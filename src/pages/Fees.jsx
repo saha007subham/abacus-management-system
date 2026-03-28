@@ -31,7 +31,7 @@ const Fees = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentMonth]);
 
-  console.log({ currentMonth });
+  // console.log({ currentMonth });
   console.log({ formattedMonth });
 
   const fetchFees = async () => {
