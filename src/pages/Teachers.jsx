@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { getTeachers, createTeacher, deleteTeacher } from '../services/api';
-import { Trash2, Plus, Users } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { getTeachers, createTeacher, deleteTeacher } from "../services/api";
+import { Trash2, Plus, Users } from "lucide-react";
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({ name: '', phone: '' });
+  const [formData, setFormData] = useState({ name: "", phone: "" });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
@@ -38,7 +38,7 @@ const Teachers = () => {
       setSubmitting(true);
       setError(null);
       await createTeacher(formData.name, formData.phone);
-      setFormData({ name: '', phone: '' });
+      setFormData({ name: "", phone: "" });
       await fetchTeachers();
     } catch (err) {
       setError(err.message);
@@ -48,7 +48,8 @@ const Teachers = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this teacher?')) return;
+    if (!window.confirm("Are you sure you want to delete this teacher?"))
+      return;
     try {
       setLoading(true);
       await deleteTeacher(id);
@@ -67,7 +68,9 @@ const Teachers = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Teachers</h1>
-          <p className="text-sm text-gray-500">Manage your institute's teaching staff</p>
+          <p className="text-sm text-gray-500">
+            Manage your institute's teaching staff
+          </p>
         </div>
       </div>
 
@@ -87,7 +90,9 @@ const Teachers = () => {
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name *
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -99,7 +104,9 @@ const Teachers = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number
+                </label>
                 <input
                   type="tel"
                   name="phone"
@@ -112,9 +119,9 @@ const Teachers = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors disabled:bg-indigo-400 font-medium"
+                className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors disabled:bg-indigo-400 font-medium cursor-pointer"
               >
-                {submitting ? 'Adding...' : 'Add Teacher'}
+                {submitting ? "Adding..." : "Add Teacher"}
               </button>
             </form>
           </div>
@@ -124,13 +131,19 @@ const Teachers = () => {
         <div className="md:col-span-2">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-6 border-b border-gray-100">
-              <h2 className="text-lg font-semibold text-gray-800">Teacher Directory</h2>
+              <h2 className="text-lg font-semibold text-gray-800">
+                Teacher Directory
+              </h2>
             </div>
 
             {loading ? (
-              <div className="p-8 text-center text-gray-500">Loading teachers...</div>
+              <div className="p-8 text-center text-gray-500">
+                Loading teachers...
+              </div>
             ) : teachers.length === 0 ? (
-              <div className="p-8 text-center text-gray-500">No teachers found. Add one to get started.</div>
+              <div className="p-8 text-center text-gray-500">
+                No teachers found. Add one to get started.
+              </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
@@ -138,16 +151,25 @@ const Teachers = () => {
                     <tr className="bg-gray-50 text-gray-600 text-sm">
                       <th className="px-6 py-3 font-medium">Name</th>
                       <th className="px-6 py-3 font-medium">Phone</th>
-                      <th className="px-6 py-3 font-medium text-right">Actions</th>
+                      <th className="px-6 py-3 font-medium text-right">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {teachers.map((teacher) => (
-                      <tr key={teacher.id} className="hover:bg-gray-50 transition-colors">
+                      <tr
+                        key={teacher.id}
+                        className="hover:bg-gray-50 transition-colors"
+                      >
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-900">{teacher.name}</div>
+                          <div className="font-medium text-gray-900">
+                            {teacher.name}
+                          </div>
                         </td>
-                        <td className="px-6 py-4 text-gray-600">{teacher.phone || '-'}</td>
+                        <td className="px-6 py-4 text-gray-600">
+                          {teacher.phone || "-"}
+                        </td>
                         <td className="px-6 py-4 text-right">
                           <button
                             onClick={() => handleDelete(teacher.id)}

@@ -1,12 +1,25 @@
-import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
-import { Users, GraduationCap, IndianRupee, LayoutDashboard } from 'lucide-react';
+import React from "react";
+import { Outlet, NavLink } from "react-router-dom";
+import {
+  Users,
+  GraduationCap,
+  IndianRupee,
+  LayoutDashboard,
+} from "lucide-react";
 
 const Layout = () => {
   const navItems = [
-    { name: 'Teachers', path: '/teachers', icon: <Users className="w-5 h-5" /> },
-    { name: 'Students', path: '/students', icon: <GraduationCap className="w-5 h-5" /> },
-    { name: 'Fees', path: '/fees', icon: <IndianRupee className="w-5 h-5" /> },
+    {
+      name: "Teachers",
+      path: "/teachers",
+      icon: <Users className="w-5 h-5" />,
+    },
+    {
+      name: "Students",
+      path: "/students",
+      icon: <GraduationCap className="w-5 h-5" />,
+    },
+    { name: "Fees", path: "/fees", icon: <IndianRupee className="w-5 h-5" /> },
   ];
 
   return (
@@ -25,9 +38,10 @@ const Layout = () => {
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
-                  ? 'bg-indigo-50 text-indigo-700'
-                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-indigo-50 text-indigo-700"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                 }`
               }
             >
@@ -41,7 +55,9 @@ const Layout = () => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden">
         <header className="h-16 bg-white border-b border-gray-200 flex items-center px-6 shadow-sm z-10 hidden md:flex">
-          <h2 className="text-xl font-semibold text-gray-800">Institute Management</h2>
+          <h2 className="text-xl font-semibold text-gray-800">
+            Institute Management System
+          </h2>
         </header>
         <div className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
           <Outlet />

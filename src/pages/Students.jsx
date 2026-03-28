@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { getStudents, createStudent, deleteStudent, getTeachers } from '../services/api';
-import { Trash2, Plus, GraduationCap } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  getStudents,
+  createStudent,
+  deleteStudent,
+  getTeachers,
+} from "../services/api";
+import { Trash2, Plus, GraduationCap } from "lucide-react";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [formData, setFormData] = useState({ name: '', teacher_id: '', monthly_fee: '' });
+  const [formData, setFormData] = useState({
+    name: "",
+    teacher_id: "",
+    monthly_fee: "",
+  });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
@@ -20,7 +29,7 @@ const Students = () => {
       setLoading(true);
       const [studentsData, teachersData] = await Promise.all([
         getStudents(),
-        getTeachers()
+        getTeachers(),
       ]);
       setStudents(studentsData);
       setTeachers(teachersData);
@@ -43,8 +52,12 @@ const Students = () => {
     try {
       setSubmitting(true);
       setError(null);
-      await createStudent(formData.name, formData.teacher_id || null, parseFloat(formData.monthly_fee));
-      setFormData({ name: '', teacher_id: '', monthly_fee: '' });
+      await createStudent(
+        formData.name,
+        formData.teacher_id || null,
+        parseFloat(formData.monthly_fee),
+      );
+      setFormData({ name: "", teacher_id: "", monthly_fee: "" });
       await fetchData();
     } catch (err) {
       setError(err.message);
@@ -54,7 +67,12 @@ const Students = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this student? All their fee records will be lost.')) return;
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this student? All their fee records will be lost.",
+      )
+    )
+      return;
     try {
       setLoading(true);
       await deleteStudent(id);
@@ -73,7 +91,9 @@ const Students = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Students</h1>
-          <p className="text-sm text-gray-500">Manage enrolled students and their assigned teachers</p>
+          <p className="text-sm text-gray-500">
+            Manage enrolled students and their assigned teachers
+          </p>
         </div>
       </div>
 
@@ -93,7 +113,9 @@ const Students = () => {
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name *
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -106,7 +128,9 @@ const Students = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Assign Teacher</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Assign Teacher
+                </label>
                 <select
                   name="teacher_id"
                   value={formData.teacher_id}
@@ -114,7 +138,7 @@ const Students = () => {
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-white text-black"
                 >
                   <option value="">-- Select a Teacher --</option>
-                  {teachers.map(teacher => (
+                  {teachers.map((teacher) => (
                     <option key={teacher.id} value={teacher.id}>
                       {teacher.name}
                     </option>
@@ -123,7 +147,9 @@ const Students = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Fee ($) *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Monthly Fee ($) *
+                </label>
                 <input
                   type="number"
                   name="monthly_fee"
@@ -140,9 +166,9 @@ const Students = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition-colors disabled:bg-emerald-400 font-medium mt-6"
+                className="w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition-colors disabled:bg-emerald-400 font-medium mt-6 cursor-pointer"
               >
-                {submitting ? 'Adding...' : 'Add Student'}
+                {submitting ? "Adding..." : "Add Student"}
               </button>
             </form>
           </div>
@@ -152,29 +178,44 @@ const Students = () => {
         <div className="md:col-span-2">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-6 border-b border-gray-100">
-              <h2 className="text-lg font-semibold text-gray-800">Student Roster</h2>
+              <h2 className="text-lg font-semibold text-gray-800">
+                Student Roster
+              </h2>
             </div>
 
             {loading ? (
-              <div className="p-8 text-center text-gray-500">Loading students...</div>
+              <div className="p-8 text-center text-gray-500">
+                Loading students...
+              </div>
             ) : students.length === 0 ? (
-              <div className="p-8 text-center text-gray-500">No students found. Add one to get started.</div>
+              <div className="p-8 text-center text-gray-500">
+                No students found. Add one to get started.
+              </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-gray-50 text-gray-600 text-sm">
                       <th className="px-6 py-3 font-medium">Name</th>
-                      <th className="px-6 py-3 font-medium">Assigned Teacher</th>
+                      <th className="px-6 py-3 font-medium">
+                        Assigned Teacher
+                      </th>
                       <th className="px-6 py-3 font-medium">Monthly Fee</th>
-                      <th className="px-6 py-3 font-medium text-right">Actions</th>
+                      <th className="px-6 py-3 font-medium text-right">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {students.map((student) => (
-                      <tr key={student.id} className="hover:bg-gray-50 transition-colors">
+                      <tr
+                        key={student.id}
+                        className="hover:bg-gray-50 transition-colors"
+                      >
                         <td className="px-6 py-4">
-                          <div className="font-medium text-gray-900">{student.name}</div>
+                          <div className="font-medium text-gray-900">
+                            {student.name}
+                          </div>
                         </td>
                         <td className="px-6 py-4 text-gray-600">
                           {student.teachers ? (
@@ -182,11 +223,13 @@ const Students = () => {
                               {student.teachers.name}
                             </span>
                           ) : (
-                            <span className="text-gray-400 text-sm italic">Unassigned</span>
+                            <span className="text-gray-400 text-sm italic">
+                              Unassigned
+                            </span>
                           )}
                         </td>
                         <td className="px-6 py-4 text-gray-900 font-medium">
-                          ${Number(student.monthly_fee).toFixed(2)}
+                          ₹{Number(student.monthly_fee).toFixed(2)}
                         </td>
                         <td className="px-6 py-4 text-right">
                           <button
